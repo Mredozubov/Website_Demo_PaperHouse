@@ -1,153 +1,519 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
 
-  <title>Portfolio Website</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    <title>Michael Redozubov | Resume Website</title>
 
-    html {
-      scroll-behavior: smooth;
-      scroll-padding-top: 80px;
-    }
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      background-color: #f5f5f5;
-      color: #222;
-    }
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 90px;
+        }
 
-    .navbar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 70px;
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f3f5f7;
+            color: #17202a;
+        }
 
-      display: flex;
-      justify-content: center;
-      align-items: center;
+        /* Fixed navigation bar */
+        .site-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
 
-      background-color: #111;
-      z-index: 1000;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
-    }
+            width: 100%;
+            min-height: 80px;
 
-    .navbar ul {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 30px;
-      list-style: none;
-    }
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
 
-    .navbar a {
-      color: white;
-      text-decoration: none;
-      font-size: 16px;
-      font-weight: bold;
-      transition: color 0.2s ease;
-    }
+            padding: 15px 5%;
 
-    .navbar a:hover {
-      color: #bdbdbd;
-    }
+            background-color: #ffffff;
+            border-bottom: 1px solid #d8dee4;
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+        }
 
-    main {
-      padding-top: 70px;
-    }
+        .site-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            white-space: nowrap;
+        }
 
-    section {
-      min-height: 100vh;
+        .navigation {
+            display: flex;
+            align-items: center;
+            gap: 8px;
 
-      display: flex;
-      justify-content: center;
-      align-items: center;
+            padding: 7px;
 
-      padding: 40px 20px;
-      border-bottom: 1px solid #d5d5d5;
-    }
+            background-color: #edf2f7;
+            border-radius: 12px;
+        }
 
-    section:nth-child(even) {
-      background-color: #ffffff;
-    }
+        .navigation a {
+            display: block;
 
-    section:nth-child(odd) {
-      background-color: #eeeeee;
-    }
+            padding: 11px 16px;
 
-    section h1 {
-      font-size: clamp(42px, 8vw, 90px);
-      text-align: center;
-      text-transform: uppercase;
-      letter-spacing: 4px;
-    }
+            color: #17202a;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            text-transform: capitalize;
 
-    @media (max-width: 700px) {
-      .navbar {
-        height: auto;
-        min-height: 70px;
-        padding: 15px;
-      }
+            border-radius: 8px;
 
-      .navbar ul {
-        flex-wrap: wrap;
-        gap: 12px 20px;
-      }
+            transition:
+                background-color 0.2s ease,
+                color 0.2s ease,
+                transform 0.2s ease;
+        }
 
-      .navbar a {
-        font-size: 14px;
-      }
+        .navigation a:hover,
+        .navigation a:focus {
+            color: #ffffff;
+            background-color: #1565c0;
+            transform: translateY(-1px);
+            outline: none;
+        }
 
-      main {
-        padding-top: 100px;
-      }
+        main {
+            padding-top: 80px;
+        }
 
-      html {
-        scroll-padding-top: 110px;
-      }
-    }
-  </style>
+        /* Shared section styling */
+        .page-section {
+            min-height: 100vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 80px 6%;
+        }
+
+        .section-title {
+            width: 100%;
+            max-width: 1100px;
+
+            padding: 45px;
+
+            font-size: clamp(2.5rem, 7vw, 6rem);
+            text-align: center;
+            text-transform: capitalize;
+
+            background-color: #ffffff;
+            border: 1px solid #dfe5eb;
+            border-radius: 24px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Summary section */
+        #summary {
+            min-height: calc(100vh - 80px);
+
+            background:
+                radial-gradient(
+                    circle at top right,
+                    rgba(21, 101, 192, 0.16),
+                    transparent 35%
+                ),
+                linear-gradient(
+                    135deg,
+                    #eef5ff,
+                    #f8fafc
+                );
+        }
+
+        .summary-container {
+            width: 100%;
+            max-width: 1250px;
+
+            display: grid;
+            grid-template-columns: minmax(280px, 420px) 1fr;
+            gap: 55px;
+            align-items: center;
+        }
+
+        .profile-card {
+            min-height: 500px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 30px;
+
+            background-color: #ffffff;
+            border: 1px solid #dfe5eb;
+            border-radius: 28px;
+            box-shadow: 0 20px 55px rgba(0, 0, 0, 0.12);
+        }
+
+        .profile-placeholder {
+            width: 100%;
+            min-height: 430px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 25px;
+
+            color: #4d5b68;
+            font-size: 1.25rem;
+            font-weight: 600;
+            text-align: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #dbeafe,
+                    #e0f2fe
+                );
+
+            border: 3px dashed #7aa7d9;
+            border-radius: 20px;
+        }
+
+        /*
+        To use a real picture, replace the profile-placeholder div with:
+
+        <img
+            class="profile-image"
+            src="images/profile.jpg"
+            alt="Michael Redozubov"
+        >
+        */
+
+        .profile-image {
+            width: 100%;
+            height: 430px;
+
+            display: block;
+
+            object-fit: cover;
+            object-position: center;
+
+            border-radius: 20px;
+        }
+
+        .summary-content {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .summary-label {
+            width: fit-content;
+
+            padding: 10px 18px;
+
+            color: #0d47a1;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+
+            background-color: #dbeafe;
+            border-radius: 999px;
+        }
+
+        .summary-heading {
+            font-size: clamp(3rem, 7vw, 6.5rem);
+            line-height: 0.95;
+            text-transform: capitalize;
+        }
+
+        .summary-box {
+            min-height: 230px;
+
+            padding: 35px;
+
+            background-color: #1565c0;
+            border-radius: 24px;
+            box-shadow: 0 18px 45px rgba(21, 101, 192, 0.25);
+        }
+
+        .summary-box p {
+            color: #ffffff;
+            font-size: clamp(1.2rem, 2vw, 1.6rem);
+            line-height: 1.6;
+        }
+
+        /* Different backgrounds make sections easier to see */
+        #resume {
+            background-color: #f8fafc;
+        }
+
+        #history {
+            background-color: #eaf2f8;
+        }
+
+        #projects {
+            background-color: #f5eef8;
+        }
+
+        #contacts {
+            background-color: #e8f8f5;
+        }
+
+        /* Mobile navigation */
+        .menu-button {
+            display: none;
+
+            padding: 10px 14px;
+
+            color: #ffffff;
+            font-size: 1rem;
+            font-weight: 700;
+
+            background-color: #1565c0;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 850px) {
+            .site-header {
+                min-height: 70px;
+                padding: 13px 5%;
+            }
+
+            .site-title {
+                font-size: 1.4rem;
+            }
+
+            .menu-button {
+                display: block;
+            }
+
+            .navigation {
+                position: absolute;
+                top: 70px;
+                left: 0;
+
+                width: 100%;
+
+                display: none;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 4px;
+
+                padding: 15px 5%;
+
+                background-color: #ffffff;
+                border-top: 1px solid #d8dee4;
+                border-radius: 0;
+                box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
+            }
+
+            .navigation.open {
+                display: flex;
+            }
+
+            .navigation a {
+                text-align: center;
+            }
+
+            main {
+                padding-top: 70px;
+            }
+
+            html {
+                scroll-padding-top: 70px;
+            }
+
+            .summary-container {
+                grid-template-columns: 1fr;
+                gap: 35px;
+            }
+
+            .profile-card {
+                min-height: auto;
+            }
+
+            .profile-placeholder,
+            .profile-image {
+                min-height: 380px;
+                height: 380px;
+            }
+
+            .summary-content {
+                text-align: center;
+                align-items: center;
+            }
+
+            .summary-box {
+                width: 100%;
+                min-height: 190px;
+                text-align: left;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .site-title {
+                font-size: 1.15rem;
+            }
+
+            .page-section {
+                padding: 55px 20px;
+            }
+
+            .profile-card {
+                padding: 18px;
+                border-radius: 20px;
+            }
+
+            .profile-placeholder,
+            .profile-image {
+                min-height: 310px;
+                height: 310px;
+            }
+
+            .summary-box {
+                padding: 25px;
+                border-radius: 18px;
+            }
+
+            .section-title {
+                padding: 35px 20px;
+                border-radius: 18px;
+            }
+        }
+    </style>
 </head>
 
 <body>
-  <nav class="navbar">
-    <ul>
-      <li><a href="#summary">Summary</a></li>
-      <li><a href="#resume">Resume</a></li>
-      <li><a href="#history">History</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#contacts">Contacts</a></li>
-    </ul>
-  </nav>
+    <header class="site-header">
+        <div class="site-title">Resume Website</div>
 
-  <main>
-    <section id="summary">
-      <h1>Summary</h1>
-    </section>
+        <button
+            class="menu-button"
+            id="menuButton"
+            type="button"
+            aria-label="Open navigation menu"
+            aria-expanded="false"
+        >
+            Menu
+        </button>
 
-    <section id="resume">
-      <h1>Resume</h1>
-    </section>
+        <nav
+            class="navigation"
+            id="navigation"
+            aria-label="Main navigation"
+        >
+            <a href="#summary">Summary</a>
+            <a href="#resume">Resume</a>
+            <a href="#history">History</a>
+            <a href="#projects">Projects</a>
+            <a href="#contacts">Contacts</a>
+        </nav>
+    </header>
 
-    <section id="history">
-      <h1>History</h1>
-    </section>
+    <main>
+        <section
+            class="page-section"
+            id="summary"
+        >
+            <div class="summary-container">
+                <div class="profile-card">
+                    <div class="profile-placeholder">
+                        Insert profile picture here
+                    </div>
+                </div>
 
-    <section id="projects">
-      <h1>Projects</h1>
-    </section>
+                <div class="summary-content">
+                    <div class="summary-label">
+                        Welcome
+                    </div>
 
-    <section id="contacts">
-      <h1>Contacts</h1>
-    </section>
-  </main>
+                    <h1 class="summary-heading">
+                        Summary
+                    </h1>
+
+                    <div class="summary-box">
+                        <p>
+                            Welcome to my resume website.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section
+            class="page-section"
+            id="resume"
+        >
+            <h2 class="section-title">
+                Resume
+            </h2>
+        </section>
+
+        <section
+            class="page-section"
+            id="history"
+        >
+            <h2 class="section-title">
+                History
+            </h2>
+        </section>
+
+        <section
+            class="page-section"
+            id="projects"
+        >
+            <h2 class="section-title">
+                Projects
+            </h2>
+        </section>
+
+        <section
+            class="page-section"
+            id="contacts"
+        >
+            <h2 class="section-title">
+                Contacts
+            </h2>
+        </section>
+    </main>
+
+    <script>
+        const menuButton = document.getElementById("menuButton");
+        const navigation = document.getElementById("navigation");
+        const navigationLinks = navigation.querySelectorAll("a");
+
+        menuButton.addEventListener("click", function () {
+            const menuIsOpen = navigation.classList.toggle("open");
+
+            menuButton.setAttribute(
+                "aria-expanded",
+                menuIsOpen.toString()
+            );
+        });
+
+        navigationLinks.forEach(function (link) {
+            link.addEventListener("click", function () {
+                navigation.classList.remove("open");
+                menuButton.setAttribute("aria-expanded", "false");
+            });
+        });
+    </script>
 </body>
 </html>
