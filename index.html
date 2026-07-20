@@ -310,12 +310,47 @@
         /* HERO */
 
         .hero-section {
+            position: relative;
             padding-top: 46px;
             padding-bottom: 50px;
             background:
                 radial-gradient(circle at 86% 12%, rgba(15, 159, 154, 0.14), transparent 28%),
                 radial-gradient(circle at 8% 88%, rgba(37, 99, 235, 0.12), transparent 30%),
                 linear-gradient(145deg, #f8fbff, #eef5ff 58%, #f8fafc);
+            overflow: hidden;
+        }
+
+        .hero-section::before,
+        .hero-section::after {
+            position: absolute;
+            content: "";
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero-section::before {
+            width: 260px;
+            height: 260px;
+            right: 8%;
+            top: 90px;
+            border: 1px solid rgba(37, 99, 235, 0.12);
+            box-shadow:
+                0 0 0 42px rgba(37, 99, 235, 0.035),
+                0 0 0 88px rgba(15, 159, 154, 0.025);
+        }
+
+        .hero-section::after {
+            width: 150px;
+            height: 150px;
+            left: 42%;
+            bottom: -42px;
+            background: rgba(255, 255, 255, 0.38);
+            border: 1px solid rgba(15, 159, 154, 0.1);
+        }
+
+        .hero-section .section-container {
+            position: relative;
+            z-index: 2;
         }
 
         .hero-grid {
@@ -449,7 +484,7 @@
             position: absolute;
             top: 22px;
             bottom: 22px;
-            left: 112px;
+            left: 154px;
             width: 2px;
             content: "";
             background: var(--slate-200);
@@ -458,9 +493,9 @@
         .timeline-entry {
             position: relative;
             display: grid;
-            grid-template-columns: 86px 20px minmax(0, 1fr);
+            grid-template-columns: 128px 20px minmax(0, 1fr);
             gap: 16px;
-            padding: 0 0 24px;
+            padding: 0 0 22px;
         }
 
         .timeline-entry:last-child {
@@ -468,13 +503,15 @@
         }
 
         .timeline-date {
-            padding-top: 19px;
+            padding-top: 21px;
             color: var(--slate-500);
-            font-size: 0.78rem;
+            font-size: 0.75rem;
             font-weight: 800;
-            line-height: 1.35;
+            line-height: 1;
             text-align: right;
             text-transform: uppercase;
+            white-space: nowrap;
+            letter-spacing: 0.01em;
         }
 
         .timeline-marker {
@@ -490,7 +527,7 @@
         }
 
         .experience-card {
-            padding: 23px 25px;
+            padding: 18px 20px;
             background: var(--slate-50);
             border: 1px solid var(--slate-200);
             border-radius: var(--radius-md);
@@ -535,17 +572,17 @@
         }
 
         .experience-card p {
-            margin-top: 13px;
+            margin-top: 9px;
             color: var(--slate-600);
-            font-size: 0.94rem;
-            line-height: 1.7;
+            font-size: 0.9rem;
+            line-height: 1.55;
         }
 
         .experience-tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 7px;
-            margin-top: 14px;
+            gap: 6px;
+            margin-top: 10px;
         }
 
         .experience-tags span {
@@ -558,108 +595,166 @@
             border-radius: 7px;
         }
 
+
         /* PROJECTS */
 
         .projects-section {
             background: linear-gradient(145deg, var(--slate-50), var(--blue-50));
+            overflow: hidden;
         }
 
         .projects-shell {
+            --carousel-width: min(100%, 980px);
             position: relative;
+            width: var(--carousel-width);
+            margin: 0 auto;
         }
 
-        .projects-viewport {
-            overflow: hidden;
-        }
-
-        .projects-track {
-            display: flex;
-            transition: transform 520ms cubic-bezier(0.22, 1, 0.36, 1);
-        }
-
-        .project-slide {
-            min-width: 100%;
-        }
-
-        .project-card {
-            min-height: 400px;
-            display: grid;
-            grid-template-columns: minmax(260px, 0.9fr) minmax(0, 1.4fr);
-            overflow: hidden;
-            background: var(--white);
-            border: 1px solid var(--slate-200);
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-md);
-        }
-
-        .project-visual {
+        .projects-stage {
             position: relative;
-            min-height: 360px;
+            height: 470px;
+            perspective: 1250px;
+            perspective-origin: 50% 44%;
+            overflow: visible;
+        }
+
+        .projects-ring {
+            position: absolute;
+            inset: 0;
+            transform-style: preserve-3d;
+        }
+
+        .project-orbit-card {
+            position: absolute;
+            top: 22px;
+            left: 50%;
+            width: clamp(150px, 20vw, 220px);
+            min-height: 188px;
+            padding: 22px 18px;
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
-            padding: 30px;
             color: var(--white);
             background:
-                radial-gradient(circle at 80% 15%, rgba(255,255,255,0.22), transparent 25%),
+                radial-gradient(circle at 78% 16%, rgba(255, 255, 255, 0.24), transparent 28%),
                 linear-gradient(145deg, var(--navy-900), var(--blue-700));
-            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 24px;
+            box-shadow: 0 18px 40px rgba(15, 23, 42, 0.16);
+            cursor: pointer;
+            transform-style: preserve-3d;
+            transform-origin: center center;
+            transition:
+                transform 850ms cubic-bezier(0.2, 0.8, 0.2, 1),
+                opacity 850ms ease,
+                filter 850ms ease,
+                box-shadow 320ms ease,
+                border-color 320ms ease;
+            will-change: transform, opacity, filter;
+            user-select: none;
         }
 
-        .project-number {
+        .project-orbit-card::before {
             position: absolute;
-            top: 18px;
-            right: 23px;
-            color: rgba(255, 255, 255, 0.14);
-            font-size: 6.5rem;
-            font-weight: 900;
-            line-height: 1;
+            inset: 0;
+            content: "";
+            border-radius: inherit;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.17), transparent 48%);
+            pointer-events: none;
         }
 
-        .project-visual-label {
+        .project-orbit-card:hover,
+        .project-orbit-card:focus-visible {
+            outline: none;
+            border-color: rgba(191, 219, 254, 0.95);
+        }
+
+        .project-orbit-card.is-active {
+            box-shadow:
+                0 0 0 1px rgba(255, 255, 255, 0.38),
+                0 0 34px rgba(37, 99, 235, 0.46),
+                0 28px 55px rgba(15, 23, 42, 0.24);
+        }
+
+        .project-orbit-number {
+            position: absolute;
+            top: 15px;
+            right: 17px;
+            color: rgba(255, 255, 255, 0.43);
+            font-size: 0.72rem;
+            font-weight: 850;
+            letter-spacing: 0.1em;
+        }
+
+        .project-orbit-category {
             position: relative;
             z-index: 1;
+            margin-bottom: 8px;
             color: #bfdbfe;
-            font-size: 0.75rem;
+            font-size: 0.66rem;
             font-weight: 850;
-            letter-spacing: 0.13em;
+            letter-spacing: 0.12em;
             text-transform: uppercase;
         }
 
-        .project-visual h3 {
+        .project-orbit-card h3 {
             position: relative;
             z-index: 1;
-            max-width: 420px;
+            font-size: clamp(1.35rem, 2.5vw, 2rem);
+            font-weight: 900;
+            letter-spacing: -0.045em;
+            line-height: 1.02;
+        }
+
+        .project-detail {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 30;
+            min-height: 176px;
+            padding: 24px 28px;
+            background: rgba(255, 255, 255, 0.96);
+            border: 1px solid var(--slate-200);
+            border-radius: 24px;
+            box-shadow: var(--shadow-md);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+        }
+
+        .project-detail-inner {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto;
+            gap: 22px;
+            align-items: center;
+        }
+
+        .project-detail h3 {
+            color: var(--navy-950);
+            font-size: clamp(1.45rem, 3vw, 2.1rem);
+            letter-spacing: -0.035em;
+            line-height: 1.05;
+        }
+
+        .project-detail p {
+            max-width: 730px;
             margin-top: 8px;
-            font-size: clamp(2rem, 4vw, 3.5rem);
-            letter-spacing: -0.05em;
-            line-height: 1;
-        }
-
-        .project-content {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 42px;
-        }
-
-        .project-content p {
             color: var(--slate-600);
-            font-size: 1rem;
-            line-height: 1.8;
+            font-size: 0.92rem;
+            line-height: 1.65;
         }
 
         .project-tech {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 20px;
+            gap: 7px;
+            margin-top: 13px;
         }
 
         .project-tech span {
-            padding: 7px 10px;
+            padding: 6px 9px;
             color: var(--navy-800);
-            font-size: 0.76rem;
+            font-size: 0.72rem;
             font-weight: 800;
             background: var(--blue-50);
             border: 1px solid var(--blue-100);
@@ -668,17 +763,21 @@
 
         .project-actions {
             display: flex;
-            flex-wrap: wrap;
-            gap: 11px;
-            margin-top: 27px;
+            flex-direction: column;
+            gap: 9px;
+            min-width: 155px;
+        }
+
+        .project-actions .button {
+            width: 100%;
         }
 
         .carousel-controls {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 20px;
-            margin-top: 20px;
+            gap: 16px;
+            margin-top: 14px;
         }
 
         .carousel-buttons {
@@ -708,6 +807,8 @@
         .project-dots {
             display: flex;
             align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
             gap: 7px;
         }
 
@@ -884,12 +985,22 @@
                 gap: 15px;
             }
 
-            .project-card {
+            .projects-stage {
+                height: 500px;
+            }
+
+            .project-detail-inner {
                 grid-template-columns: 1fr;
             }
 
-            .project-visual {
-                min-height: 260px;
+            .project-actions {
+                flex-direction: row;
+                flex-wrap: wrap;
+                min-width: 0;
+            }
+
+            .project-actions .button {
+                width: auto;
             }
 
             .resume-layout {
@@ -954,6 +1065,7 @@
                 grid-column: 2;
                 padding-top: 0;
                 text-align: left;
+                white-space: nowrap;
             }
 
             .timeline-marker {
@@ -966,8 +1078,12 @@
                 grid-column: 2;
             }
 
-            .project-content {
-                padding: 28px 24px;
+            .projects-stage {
+                height: 535px;
+            }
+
+            .project-detail {
+                padding: 22px;
             }
 
             .contact-panel {
@@ -1012,12 +1128,22 @@
                 gap: 9px;
             }
 
-            .project-visual {
-                padding: 24px;
+            .projects-stage {
+                height: 585px;
             }
 
-            .project-number {
-                font-size: 5rem;
+            .project-orbit-card {
+                width: 142px;
+                min-height: 164px;
+                padding: 18px 14px;
+            }
+
+            .project-orbit-card h3 {
+                font-size: 1.18rem;
+            }
+
+            .project-detail {
+                padding: 20px 18px;
             }
 
             .project-actions {
@@ -1030,6 +1156,11 @@
 
             .carousel-controls {
                 flex-wrap: wrap;
+            }
+
+            .project-dots {
+                order: 3;
+                width: 100%;
             }
         }
 
@@ -1107,8 +1238,8 @@
                         </h1>
 
                         <p class="hero-subtitle">
-                            I build web applications, developer tools, data workflows, and interactive software.
-                            My experience combines programming, technical support, team coordination,
+                            Michael builds web applications, developer tools, data workflows, and interactive software.
+                            His experience combines programming, technical support, team coordination,
                             documentation, and process improvement.
                         </p>
 
@@ -1137,12 +1268,16 @@
                         <h2 class="section-title">Experience</h2>
                     </div>
                     <p class="section-description">
-                        Technical roles, measurable results, and the tools used in each position.
+                        Roles are listed in reverse chronological order. Each entry highlights the work,
+                        results, and technologies most relevant to software and technology positions.
                     </p>
                 </div>
 
                 <div class="timeline-list">
+
+
                     <article class="timeline-entry">
+                        <div class="timeline-date">Mar 2024 – May 2025</div>
                         <div class="timeline-marker" aria-hidden="true"></div>
                         <div class="experience-card">
                             <div class="experience-heading">
@@ -1150,14 +1285,14 @@
                                     <h3>Information Technology Support Specialist</h3>
                                     <div class="experience-company">The Jayce Solutions</div>
                                 </div>
-                                <span class="experience-date-inline">Mar 2024 – May 2025</span>
+                                <span class="experience-type">IT Support</span>
                             </div>
                             <p>
-                                Installed and troubleshot hardware, software, networks, peripherals, relocations, data transfers, and inventory for 500+ users while helping deploy up to 200 workstations per day.
+                                Installed and supported hardware, software, networks, peripherals, office relocations, data transfers, inventory, and troubleshooting for 500+ users while helping deploy up to 200 configured workstations per day.
                             </p>
                             <div class="experience-tags">
                                 <span>Hardware</span>
-                                <span>Software</span>
+                                <span>Software Installation</span>
                                 <span>Networking</span>
                                 <span>Troubleshooting</span>
                                 <span>Inventory</span>
@@ -1165,7 +1300,9 @@
                         </div>
                     </article>
 
+
                     <article class="timeline-entry">
+                        <div class="timeline-date">Jun – Aug 2024</div>
                         <div class="timeline-marker" aria-hidden="true"></div>
                         <div class="experience-card">
                             <div class="experience-heading">
@@ -1173,7 +1310,7 @@
                                     <h3>Human Resources Programming Intern</h3>
                                     <div class="experience-company">Metropolitan Transportation Authority</div>
                                 </div>
-                                <span class="experience-date-inline">Jun 2024 – Aug 2024</span>
+                                <span class="experience-type">Programming & Data</span>
                             </div>
                             <p>
                                 Built automated reporting with REST APIs, SQL, Microsoft Access, and Salesforce data, increasing productivity by 250% and training six employees and one manager.
@@ -1183,12 +1320,14 @@
                                 <span>SQL</span>
                                 <span>Microsoft Access</span>
                                 <span>Salesforce</span>
-                                <span>Training</span>
+                                <span>Technical Training</span>
                             </div>
                         </div>
                     </article>
 
+
                     <article class="timeline-entry">
+                        <div class="timeline-date">Jul 2020 – Aug 2022</div>
                         <div class="timeline-marker" aria-hidden="true"></div>
                         <div class="experience-card">
                             <div class="experience-heading">
@@ -1196,20 +1335,22 @@
                                     <h3>Software Developer &amp; Technical Educator</h3>
                                     <div class="experience-company">Onetap</div>
                                 </div>
-                                <span class="experience-date-inline">Jul 2020 – Aug 2022</span>
+                                <span class="experience-type">Software & Education</span>
                             </div>
                             <p>
-                                Authored 100+ programming tutorials, contributed 100K+ lines of code, created technical content reaching 55,000+ users, and led a 20-member moderation team.
+                                Created 100+ programming tutorials, contributed 100K+ lines of code, supported 300+ active learners, reached 55,000+ users, and delivered long-form technical presentations.
                             </p>
                             <div class="experience-tags">
                                 <span>Java</span>
                                 <span>JavaScript</span>
                                 <span>Lua</span>
                                 <span>AngelScript</span>
-                                <span>Technical Education</span>
+                                <span>Technical Writing</span>
+                                <span>Presentations</span>
                             </div>
                         </div>
                     </article>
+
                 </div>
             </div>
         </section>
@@ -1222,13 +1363,25 @@
                         <h2 class="section-title">Projects</h2>
                     </div>
                     <p class="section-description">
-                        Selected software, data, and web projects.
+                        Selected software, data, web, and security projects.
                     </p>
                 </div>
 
                 <div class="projects-shell" id="projectsShell">
-                    <div class="projects-viewport">
-                        <div class="projects-track" id="projectsTrack"></div>
+                    <div class="projects-stage" id="projectsStage">
+                        <div class="projects-ring" id="projectsRing" aria-label="Project carousel"></div>
+
+                        <article class="project-detail" id="projectDetail" aria-live="polite">
+                            <div class="project-detail-inner">
+                                <div>
+                                    <h3 id="projectDetailTitle"></h3>
+                                    <p id="projectDetailDescription"></p>
+                                    <div class="project-tech" id="projectDetailTech"></div>
+                                </div>
+
+                                <div class="project-actions" id="projectDetailActions"></div>
+                            </div>
+                        </article>
                     </div>
 
                     <div class="carousel-controls">
@@ -1284,14 +1437,12 @@
                     <div>
                         <h2>Let’s connect.</h2>
                         <p>
-                            What now? Use the links to contact me for help with software development,
-                            full-stack applications, data workflows, implementation, technical support,
-                            API integration, automation, databases, web development, and software documentation.
+                            What now? Click the links if you need help with software development, full-stack development, data analysis, implementation, technical support, automation, API integration, reporting, or web application development.
                         </p>
                     </div>
 
                     <div class="contact-links">
-                        <a href="mailto:MichaelRedozubov@gmail.com"><span>MichaelRedozubov@gmail.com</span><span>↗</span></a>
+                        <a href="mailto:MichaelRedozubov@gmail.com"><span>Email</span><span>↗</span></a>
                         <a href="https://www.linkedin.com/in/michael-redozubov-98022b219" target="_blank" rel="noopener noreferrer"><span>LinkedIn</span><span>↗</span></a>
                         <a href="https://github.com/Mredozubov" target="_blank" rel="noopener noreferrer"><span>GitHub</span><span>↗</span></a>
                     </div>
@@ -1415,7 +1566,12 @@
             }
         ];
 
-        const projectsTrack = document.getElementById("projectsTrack");
+        const projectsRing = document.getElementById("projectsRing");
+        const projectDetail = document.getElementById("projectDetail");
+        const projectDetailTitle = document.getElementById("projectDetailTitle");
+        const projectDetailDescription = document.getElementById("projectDetailDescription");
+        const projectDetailTech = document.getElementById("projectDetailTech");
+        const projectDetailActions = document.getElementById("projectDetailActions");
         const projectDots = document.getElementById("projectDots");
         const projectCount = document.getElementById("projectCount");
         const previousProject = document.getElementById("previousProject");
@@ -1424,42 +1580,65 @@
 
         let activeProjectIndex = 0;
         let autoplayTimer = null;
-        const autoplayDelay = 6500;
+        let rotationLocked = false;
+        const autoplayDelay = 3400;
 
-        function createProjectSlides() {
+        function getCircularOffset(index) {
+            const total = projects.length;
+            let offset = index - activeProjectIndex;
+
+            if (offset > total / 2) {
+                offset -= total;
+            }
+
+            if (offset < -total / 2) {
+                offset += total;
+            }
+
+            return offset;
+        }
+
+        function getCardTransform(offset) {
+            const absoluteOffset = Math.abs(offset);
+            const direction = Math.sign(offset);
+            const x = direction * Math.min(absoluteOffset, 3) * 152;
+            const z = 145 - absoluteOffset * 128;
+            const y = absoluteOffset === 0 ? 0 : 28 + absoluteOffset * 15;
+            const rotateY = direction * -24;
+            const scale = Math.max(0.62, 1 - absoluteOffset * 0.13);
+
+            return (
+                "translateX(-50%) " +
+                "translate3d(" + x + "px, " + y + "px, " + z + "px) " +
+                "rotateY(" + rotateY + "deg) " +
+                "scale(" + scale + ")"
+            );
+        }
+
+        function createProjectCards() {
             projects.forEach(function (project, index) {
-                const slide = document.createElement("article");
-                slide.className = "project-slide";
+                const card = document.createElement("button");
+                card.className = "project-orbit-card";
+                card.type = "button";
+                card.setAttribute("aria-label", "Show " + project.title);
+                card.innerHTML =
+                    '<span class="project-orbit-number">' +
+                        String(index + 1).padStart(2, "0") +
+                    '</span>' +
+                    '<span class="project-orbit-category">' +
+                        project.category +
+                    '</span>' +
+                    '<h3>' +
+                        project.title +
+                    '</h3>';
 
-                const technologyMarkup = project.technologies
-                    .map(function (technology) {
-                        return "<span>" + technology + "</span>";
-                    })
-                    .join("");
+                card.addEventListener("click", function () {
+                    activeProjectIndex = index;
+                    updateCarousel(true);
+                    restartAutoplay();
+                });
 
-                const repositoryButton = project.repository
-                    ? '<a class="button button-primary" href="' + project.repository + '" target="_blank" rel="noopener noreferrer">View repository</a>'
-                    : "";
-
-                const liveButton = project.live
-                    ? '<a class="button button-secondary" href="' + project.live + '" target="_blank" rel="noopener noreferrer">View live site</a>'
-                    : "";
-
-                slide.innerHTML =
-                    '<div class="project-card">' +
-                        '<div class="project-visual">' +
-                            '<div class="project-number">' + String(index + 1).padStart(2, "0") + '</div>' +
-                            '<div class="project-visual-label">' + project.category + '</div>' +
-                            '<h3>' + project.title + '</h3>' +
-                        '</div>' +
-                        '<div class="project-content">' +
-                            '<p>' + project.description + '</p>' +
-                            '<div class="project-tech">' + technologyMarkup + '</div>' +
-                            '<div class="project-actions">' + repositoryButton + liveButton + '</div>' +
-                        '</div>' +
-                    '</div>';
-
-                projectsTrack.appendChild(slide);
+                projectsRing.appendChild(card);
 
                 const dot = document.createElement("button");
                 dot.className = "project-dot";
@@ -1467,7 +1646,7 @@
                 dot.setAttribute("aria-label", "Show " + project.title);
                 dot.addEventListener("click", function () {
                     activeProjectIndex = index;
-                    updateCarousel();
+                    updateCarousel(true);
                     restartAutoplay();
                 });
 
@@ -1475,42 +1654,117 @@
             });
         }
 
-        function updateCarousel() {
-            projectsTrack.style.transform = "translateX(-" + activeProjectIndex * 100 + "%)";
+        function renderProjectDetail() {
+            const project = projects[activeProjectIndex];
+
+            projectDetailTitle.textContent = project.title;
+            projectDetailDescription.textContent = project.description;
+
+            projectDetailTech.innerHTML = project.technologies
+                .map(function (technology) {
+                    return "<span>" + technology + "</span>";
+                })
+                .join("");
+
+            const repositoryButton = project.repository
+                ? '<a class="button button-primary" href="' +
+                    project.repository +
+                    '" target="_blank" rel="noopener noreferrer">View repository</a>'
+                : "";
+
+            const liveButton = project.live
+                ? '<a class="button button-secondary" href="' +
+                    project.live +
+                    '" target="_blank" rel="noopener noreferrer">View live site</a>'
+                : "";
+
+            projectDetailActions.innerHTML = repositoryButton + liveButton;
+        }
+
+        function updateCarousel(userSelected) {
+            const cards = Array.from(projectsRing.children);
+
+            cards.forEach(function (card, index) {
+                const offset = getCircularOffset(index);
+                const distance = Math.abs(offset);
+                const isActive = index === activeProjectIndex;
+
+                card.style.transform = getCardTransform(offset);
+                card.style.opacity = String(Math.max(0.28, 1 - distance * 0.18));
+                card.style.filter =
+                    "brightness(" + Math.max(0.48, 1 - distance * 0.13) + ") " +
+                    "saturate(" + Math.max(0.55, 1 - distance * 0.1) + ")";
+                card.style.zIndex = String(20 - distance);
+                card.classList.toggle("is-active", isActive);
+                card.setAttribute("aria-current", isActive ? "true" : "false");
+                card.tabIndex = isActive || distance <= 1 ? 0 : -1;
+            });
 
             Array.from(projectDots.children).forEach(function (dot, index) {
-                dot.classList.toggle("active", index === activeProjectIndex);
-                dot.setAttribute("aria-current", index === activeProjectIndex ? "true" : "false");
+                const isActive = index === activeProjectIndex;
+                dot.classList.toggle("active", isActive);
+                dot.setAttribute("aria-current", isActive ? "true" : "false");
             });
 
             projectCount.textContent =
                 String(activeProjectIndex + 1).padStart(2, "0") +
                 " / " +
                 String(projects.length).padStart(2, "0");
+
+            renderProjectDetail();
+
+            if (userSelected) {
+                const activeCard = cards[activeProjectIndex];
+                activeCard.animate(
+                    [
+                        { transform: getCardTransform(0) + " translateZ(0)" },
+                        { transform: getCardTransform(0) + " translateZ(24px)" },
+                        { transform: getCardTransform(0) + " translateZ(0)" }
+                    ],
+                    {
+                        duration: 650,
+                        easing: "cubic-bezier(0.2, 0.8, 0.2, 1)"
+                    }
+                );
+            }
         }
 
         function showNextProject() {
             activeProjectIndex = (activeProjectIndex + 1) % projects.length;
-            updateCarousel();
+            updateCarousel(false);
         }
 
         function showPreviousProject() {
             activeProjectIndex =
                 (activeProjectIndex - 1 + projects.length) % projects.length;
-            updateCarousel();
+            updateCarousel(false);
         }
 
         function startAutoplay() {
             clearInterval(autoplayTimer);
 
-            if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+            if (
+                rotationLocked ||
+                window.matchMedia("(prefers-reduced-motion: reduce)").matches
+            ) {
                 return;
             }
 
             autoplayTimer = setInterval(showNextProject, autoplayDelay);
         }
 
+        function pauseAutoplay() {
+            rotationLocked = true;
+            clearInterval(autoplayTimer);
+        }
+
+        function resumeAutoplay() {
+            rotationLocked = false;
+            startAutoplay();
+        }
+
         function restartAutoplay() {
+            rotationLocked = false;
             startAutoplay();
         }
 
@@ -1524,17 +1778,48 @@
             restartAutoplay();
         });
 
-        projectsShell.addEventListener("mouseenter", function () {
-            clearInterval(autoplayTimer);
+        projectsRing.addEventListener("mouseenter", pauseAutoplay);
+        projectsRing.addEventListener("mouseleave", resumeAutoplay);
+        projectDetail.addEventListener("mouseenter", pauseAutoplay);
+        projectDetail.addEventListener("mouseleave", resumeAutoplay);
+
+        projectsShell.addEventListener("focusin", pauseAutoplay);
+        projectsShell.addEventListener("focusout", function (event) {
+            if (!projectsShell.contains(event.relatedTarget)) {
+                resumeAutoplay();
+            }
         });
 
+        createProjectCards();
+        updateCarousel(false);
+        startAutoplay();
+        }
+
+        previousProject.addEventListener("click", function () {
+            showPreviousProject();
+            restartAutoplay();
+        });
+
+        nextProject.addEventListener("click", function () {
+            showNextProject();
+            restartAutoplay();
+        });
+
+        function pauseAutoplay() {
+            clearInterval(autoplayTimer);
+        }
+
+        projectsShell.addEventListener("mouseenter", pauseAutoplay);
         projectsShell.addEventListener("mouseleave", startAutoplay);
-
-        projectsShell.addEventListener("focusin", function () {
-            clearInterval(autoplayTimer);
-        });
-
+        projectsShell.addEventListener("focusin", pauseAutoplay);
         projectsShell.addEventListener("focusout", startAutoplay);
+
+        projectsTrack.addEventListener("mouseover", pauseAutoplay);
+        projectsTrack.addEventListener("mouseout", function (event) {
+            if (!projectsTrack.contains(event.relatedTarget)) {
+                startAutoplay();
+            }
+        });
 
         createProjectSlides();
         updateCarousel();
