@@ -314,13 +314,18 @@
             padding-top: 46px;
             padding-bottom: 50px;
             background:
-                linear-gradient(135deg, rgba(255, 224, 236, 0.92), rgba(222, 238, 255, 0.94) 45%, rgba(225, 250, 239, 0.92) 72%, rgba(255, 241, 214, 0.92));
+                radial-gradient(circle at 86% 12%, rgba(15, 159, 154, 0.14), transparent 28%),
+                radial-gradient(circle at 8% 88%, rgba(37, 99, 235, 0.12), transparent 30%),
+                linear-gradient(145deg, #f8fbff, #eef5ff 58%, #f8fafc);
             overflow: hidden;
         }
 
         .hero-section::before,
         .hero-section::after {
-            display: none;
+            position: absolute;
+            content: "";
+            border-radius: 50%;
+            pointer-events: none;
         }
 
         .hero-section::before {
@@ -466,42 +471,7 @@
         /* HISTORY */
 
         .history-section {
-            position: relative;
             background: var(--white);
-            overflow: hidden;
-        }
-
-        .history-section::before,
-        .history-section::after {
-            position: absolute;
-            content: "";
-            border-radius: 50%;
-            pointer-events: none;
-        }
-
-        .history-section::before {
-            width: 260px;
-            height: 260px;
-            right: 7%;
-            top: 90px;
-            border: 1px solid rgba(37, 99, 235, 0.12);
-            box-shadow:
-                0 0 0 42px rgba(37, 99, 235, 0.035),
-                0 0 0 88px rgba(15, 159, 154, 0.025);
-        }
-
-        .history-section::after {
-            width: 150px;
-            height: 150px;
-            left: 4%;
-            bottom: 24px;
-            background: rgba(219, 234, 254, 0.32);
-            border: 1px solid rgba(15, 159, 154, 0.1);
-        }
-
-        .history-section .section-container {
-            position: relative;
-            z-index: 1;
         }
 
         .timeline-list {
@@ -514,7 +484,7 @@
             position: absolute;
             top: 22px;
             bottom: 22px;
-            left: 191px;
+            left: 154px;
             width: 2px;
             content: "";
             background: var(--slate-200);
@@ -523,7 +493,7 @@
         .timeline-entry {
             position: relative;
             display: grid;
-            grid-template-columns: 165px 20px minmax(0, 1fr);
+            grid-template-columns: 128px 20px minmax(0, 1fr);
             gap: 16px;
             padding: 0 0 22px;
         }
@@ -535,10 +505,11 @@
         .timeline-date {
             padding-top: 21px;
             color: var(--slate-500);
-            font-size: 0.74rem;
+            font-size: 0.75rem;
             font-weight: 800;
-            line-height: 1.25;
+            line-height: 1;
             text-align: right;
+            text-transform: uppercase;
             white-space: nowrap;
             letter-spacing: 0.01em;
         }
@@ -719,27 +690,23 @@
         }
 
         .project-orbit-category {
-            position: absolute;
-            top: 24px;
-            left: 20px;
-            right: 20px;
+            position: relative;
             z-index: 1;
-            color: #ffffff;
-            font-size: clamp(1.25rem, 2.6vw, 1.9rem);
-            font-weight: 900;
-            letter-spacing: -0.04em;
-            line-height: 1.05;
-            text-transform: none;
+            margin-bottom: 8px;
+            color: #bfdbfe;
+            font-size: 0.66rem;
+            font-weight: 850;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
         }
 
         .project-orbit-card h3 {
             position: relative;
             z-index: 1;
-            color: #dbeafe;
-            font-size: clamp(0.84rem, 1.5vw, 1.05rem);
-            font-weight: 800;
-            letter-spacing: -0.015em;
-            line-height: 1.2;
+            font-size: clamp(1.25rem, 2.4vw, 1.9rem);
+            font-weight: 900;
+            letter-spacing: -0.045em;
+            line-height: 1.02;
         }
 
         .project-detail {
@@ -806,20 +773,6 @@
 
         .project-actions .button {
             width: 100%;
-        }
-
-        .carousel-dots-bridge {
-            position: absolute;
-            left: 50%;
-            bottom: 206px;
-            z-index: 45;
-            transform: translateX(-50%);
-            padding: 9px 14px;
-            background: rgba(255, 255, 255, 0.88);
-            border: 1px solid var(--slate-200);
-            border-radius: 999px;
-            box-shadow: var(--shadow-sm);
-            backdrop-filter: blur(10px);
         }
 
         .carousel-controls {
@@ -892,7 +845,7 @@
 
         .resume-layout {
             display: grid;
-            grid-template-columns: minmax(0, 1fr);
+            grid-template-columns: minmax(0, 1fr) 300px;
             gap: 36px;
             align-items: start;
         }
@@ -1214,30 +1167,6 @@
             }
         }
 
-
-        @media (max-width: 760px) {
-            .carousel-dots-bridge {
-                bottom: 226px;
-            }
-        }
-
-        @media (max-width: 520px) {
-            .carousel-dots-bridge {
-                bottom: 286px;
-            }
-
-            .project-orbit-category {
-                top: 18px;
-                left: 14px;
-                right: 14px;
-                font-size: 1.08rem;
-            }
-
-            .project-orbit-card h3 {
-                font-size: 0.78rem;
-            }
-        }
-
         @media (prefers-reduced-motion: reduce) {
             html {
                 scroll-behavior: auto;
@@ -1312,7 +1241,9 @@
                         </h1>
 
                         <p class="hero-subtitle">
-                            Michael Redozubov is a software developer who builds practical web applications, automation tools, data workflows, and interactive software. He combines hands-on programming with technical support, clear documentation, and collaborative problem-solving to turn complex needs into reliable, user-friendly solutions.
+                            Michael builds web applications, developer tools, data workflows, and interactive software.
+                            His experience combines programming, technical support, team coordination,
+                            documentation, and process improvement.
                         </p>
 
                         <div class="hero-actions">
@@ -1339,6 +1270,10 @@
                         <span class="eyebrow">Professional background</span>
                         <h2 class="section-title">Experience</h2>
                     </div>
+                    <p class="section-description">
+                        Roles are listed in reverse chronological order. Each entry highlights the work,
+                        results, and technologies most relevant to software and technology positions.
+                    </p>
                 </div>
 
                 <div class="timeline-list">
@@ -1353,6 +1288,7 @@
                                     <h3>Information Technology Support Specialist</h3>
                                     <div class="experience-company">The Jayce Solutions</div>
                                 </div>
+                                <span class="experience-type">IT Support</span>
                             </div>
                             <p>
                                 Installed and supported hardware, software, networks, peripherals, office relocations, data transfers, inventory, and troubleshooting for 500+ users while helping deploy up to 200 configured workstations per day.
@@ -1377,6 +1313,7 @@
                                     <h3>Human Resources Programming Intern</h3>
                                     <div class="experience-company">Metropolitan Transportation Authority</div>
                                 </div>
+                                <span class="experience-type">Programming & Data</span>
                             </div>
                             <p>
                                 Built automated reporting with REST APIs, SQL, Microsoft Access, and Salesforce data, increasing productivity by 250% and training six employees and one manager.
@@ -1401,6 +1338,7 @@
                                     <h3>Software Developer &amp; Technical Educator</h3>
                                     <div class="experience-company">Onetap</div>
                                 </div>
+                                <span class="experience-type">Software & Education</span>
                             </div>
                             <p>
                                 Created 100+ programming tutorials, contributed 100K+ lines of code, supported 300+ active learners, reached 55,000+ users, and delivered long-form technical presentations.
@@ -1436,10 +1374,6 @@
                     <div class="projects-stage" id="projectsStage">
                         <div class="projects-orbit" id="projectsOrbit" aria-label="Project carousel"></div>
 
-                        <div class="carousel-dots-bridge">
-                            <div class="project-dots" id="projectDots" aria-label="Choose project"></div>
-                        </div>
-
                         <article class="project-detail" id="projectDetail" aria-live="polite">
                             <div class="project-detail-inner">
                                 <div>
@@ -1458,6 +1392,8 @@
                             <button class="carousel-button" id="previousProject" type="button" aria-label="Previous project">←</button>
                             <button class="carousel-button" id="nextProject" type="button" aria-label="Next project">→</button>
                         </div>
+
+                        <div class="project-dots" id="projectDots" aria-label="Choose project"></div>
 
                         <div class="project-count" id="projectCount" aria-live="polite"></div>
                     </div>
@@ -1483,6 +1419,17 @@
                             <img class="resume-image" src="images/resume.jpg" alt="Michael Redozubov resume preview">
                         </a>
                     </div>
+
+                    <aside class="resume-side-card">
+                        <h3>Resume document</h3>
+                        <p>
+                            Keep the image optimized for web viewing and use a PDF as the primary downloadable
+                            version when available.
+                        </p>
+                        <a class="button button-primary" href="images/resume.jpg" target="_blank" rel="noopener noreferrer">
+                            Open full size
+                        </a>
+                    </aside>
                 </div>
             </div>
         </section>
@@ -1491,8 +1438,10 @@
             <div class="section-container">
                 <div class="contact-panel">
                     <div>
-                        <h2>Contact Michael.</h2>
-                        <p>Reach out for software development, data, automation, or technical support work.</p>
+                        <h2>Let’s connect.</h2>
+                        <p>
+                            What now? Click the links if you need help with software development, full-stack development, data analysis, implementation, technical support, automation, API integration, reporting, or web application development.
+                        </p>
                     </div>
 
                     <div class="contact-links">
