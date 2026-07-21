@@ -314,18 +314,13 @@
             padding-top: 46px;
             padding-bottom: 50px;
             background:
-                radial-gradient(circle at 86% 12%, rgba(15, 159, 154, 0.14), transparent 28%),
-                radial-gradient(circle at 8% 88%, rgba(37, 99, 235, 0.12), transparent 30%),
-                linear-gradient(145deg, #f8fbff, #eef5ff 58%, #f8fafc);
+                linear-gradient(135deg, rgba(255, 224, 236, 0.92), rgba(222, 238, 255, 0.94) 45%, rgba(225, 250, 239, 0.92) 72%, rgba(255, 241, 214, 0.92));
             overflow: hidden;
         }
 
         .hero-section::before,
         .hero-section::after {
-            position: absolute;
-            content: "";
-            border-radius: 50%;
-            pointer-events: none;
+            display: none;
         }
 
         .hero-section::before {
@@ -471,7 +466,42 @@
         /* HISTORY */
 
         .history-section {
+            position: relative;
             background: var(--white);
+            overflow: hidden;
+        }
+
+        .history-section::before,
+        .history-section::after {
+            position: absolute;
+            content: "";
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .history-section::before {
+            width: 260px;
+            height: 260px;
+            right: 7%;
+            top: 90px;
+            border: 1px solid rgba(37, 99, 235, 0.12);
+            box-shadow:
+                0 0 0 42px rgba(37, 99, 235, 0.035),
+                0 0 0 88px rgba(15, 159, 154, 0.025);
+        }
+
+        .history-section::after {
+            width: 150px;
+            height: 150px;
+            left: 4%;
+            bottom: 24px;
+            background: rgba(219, 234, 254, 0.32);
+            border: 1px solid rgba(15, 159, 154, 0.1);
+        }
+
+        .history-section .section-container {
+            position: relative;
+            z-index: 1;
         }
 
         .timeline-list {
@@ -484,7 +514,7 @@
             position: absolute;
             top: 22px;
             bottom: 22px;
-            left: 154px;
+            left: 191px;
             width: 2px;
             content: "";
             background: var(--slate-200);
@@ -493,7 +523,7 @@
         .timeline-entry {
             position: relative;
             display: grid;
-            grid-template-columns: 128px 20px minmax(0, 1fr);
+            grid-template-columns: 165px 20px minmax(0, 1fr);
             gap: 16px;
             padding: 0 0 22px;
         }
@@ -505,11 +535,10 @@
         .timeline-date {
             padding-top: 21px;
             color: var(--slate-500);
-            font-size: 0.75rem;
+            font-size: 0.74rem;
             font-weight: 800;
-            line-height: 1;
+            line-height: 1.25;
             text-align: right;
-            text-transform: uppercase;
             white-space: nowrap;
             letter-spacing: 0.01em;
         }
@@ -604,52 +633,54 @@
         }
 
         .projects-shell {
-            --carousel-width: min(100%, 980px);
             position: relative;
-            width: var(--carousel-width);
+            width: min(100%, 1040px);
             margin: 0 auto;
         }
 
         .projects-stage {
             position: relative;
-            height: 470px;
-            perspective: 1250px;
-            perspective-origin: 50% 44%;
-            overflow: visible;
+            height: 590px;
+            perspective: 1400px;
+            perspective-origin: 50% 38%;
         }
 
-        .projects-ring {
+        .projects-orbit {
             position: absolute;
-            inset: 0;
+            top: 0;
+            right: 0;
+            left: 0;
+            height: 365px;
             transform-style: preserve-3d;
         }
 
         .project-orbit-card {
             position: absolute;
-            top: 22px;
+            top: 50%;
             left: 50%;
-            width: clamp(150px, 20vw, 220px);
-            min-height: 188px;
+            width: clamp(150px, 19vw, 220px);
+            min-height: 180px;
             padding: 22px 18px;
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
             color: var(--white);
+            text-align: left;
             background:
-                radial-gradient(circle at 78% 16%, rgba(255, 255, 255, 0.24), transparent 28%),
+                radial-gradient(circle at 78% 16%, rgba(255, 255, 255, 0.24), transparent 29%),
                 linear-gradient(145deg, var(--navy-900), var(--blue-700));
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 24px;
-            box-shadow: 0 18px 40px rgba(15, 23, 42, 0.16);
+            box-shadow: 0 18px 38px rgba(15, 23, 42, 0.17);
             cursor: pointer;
             transform-style: preserve-3d;
-            transform-origin: center center;
+            transform-origin: center;
             transition:
-                transform 850ms cubic-bezier(0.2, 0.8, 0.2, 1),
-                opacity 850ms ease,
-                filter 850ms ease,
-                box-shadow 320ms ease,
-                border-color 320ms ease;
+                transform 1150ms cubic-bezier(0.22, 0.72, 0.18, 1),
+                opacity 900ms ease,
+                filter 900ms ease,
+                box-shadow 450ms ease,
+                border-color 450ms ease;
             will-change: transform, opacity, filter;
             user-select: none;
         }
@@ -659,7 +690,7 @@
             inset: 0;
             content: "";
             border-radius: inherit;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.17), transparent 48%);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), transparent 48%);
             pointer-events: none;
         }
 
@@ -670,40 +701,45 @@
         }
 
         .project-orbit-card.is-active {
+            border-color: rgba(219, 234, 254, 0.95);
             box-shadow:
-                0 0 0 1px rgba(255, 255, 255, 0.38),
-                0 0 34px rgba(37, 99, 235, 0.46),
-                0 28px 55px rgba(15, 23, 42, 0.24);
+                0 0 0 1px rgba(255, 255, 255, 0.48),
+                0 0 34px rgba(37, 99, 235, 0.5),
+                0 30px 60px rgba(15, 23, 42, 0.25);
         }
 
         .project-orbit-number {
             position: absolute;
             top: 15px;
             right: 17px;
-            color: rgba(255, 255, 255, 0.43);
+            color: rgba(255, 255, 255, 0.42);
             font-size: 0.72rem;
             font-weight: 850;
             letter-spacing: 0.1em;
         }
 
         .project-orbit-category {
-            position: relative;
+            position: absolute;
+            top: 24px;
+            left: 20px;
+            right: 20px;
             z-index: 1;
-            margin-bottom: 8px;
-            color: #bfdbfe;
-            font-size: 0.66rem;
-            font-weight: 850;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
+            color: #ffffff;
+            font-size: clamp(1.25rem, 2.6vw, 1.9rem);
+            font-weight: 900;
+            letter-spacing: -0.04em;
+            line-height: 1.05;
+            text-transform: none;
         }
 
         .project-orbit-card h3 {
             position: relative;
             z-index: 1;
-            font-size: clamp(1.35rem, 2.5vw, 2rem);
-            font-weight: 900;
-            letter-spacing: -0.045em;
-            line-height: 1.02;
+            color: #dbeafe;
+            font-size: clamp(0.84rem, 1.5vw, 1.05rem);
+            font-weight: 800;
+            letter-spacing: -0.015em;
+            line-height: 1.2;
         }
 
         .project-detail {
@@ -711,12 +747,12 @@
             right: 0;
             bottom: 0;
             left: 0;
-            z-index: 30;
-            min-height: 176px;
-            padding: 24px 28px;
-            background: rgba(255, 255, 255, 0.96);
+            z-index: 40;
+            min-height: 190px;
+            padding: 25px 28px;
+            background: rgba(255, 255, 255, 0.97);
             border: 1px solid var(--slate-200);
-            border-radius: 24px;
+            border-radius: 25px;
             box-shadow: var(--shadow-md);
             backdrop-filter: blur(14px);
             -webkit-backdrop-filter: blur(14px);
@@ -725,7 +761,7 @@
         .project-detail-inner {
             display: grid;
             grid-template-columns: minmax(0, 1fr) auto;
-            gap: 22px;
+            gap: 24px;
             align-items: center;
         }
 
@@ -772,12 +808,26 @@
             width: 100%;
         }
 
+        .carousel-dots-bridge {
+            position: absolute;
+            left: 50%;
+            bottom: 206px;
+            z-index: 45;
+            transform: translateX(-50%);
+            padding: 9px 14px;
+            background: rgba(255, 255, 255, 0.88);
+            border: 1px solid var(--slate-200);
+            border-radius: 999px;
+            box-shadow: var(--shadow-sm);
+            backdrop-filter: blur(10px);
+        }
+
         .carousel-controls {
             display: flex;
             align-items: center;
             justify-content: space-between;
             gap: 16px;
-            margin-top: 14px;
+            margin-top: 15px;
         }
 
         .carousel-buttons {
@@ -842,7 +892,7 @@
 
         .resume-layout {
             display: grid;
-            grid-template-columns: minmax(0, 1fr) 300px;
+            grid-template-columns: minmax(0, 1fr);
             gap: 36px;
             align-items: start;
         }
@@ -986,7 +1036,7 @@
             }
 
             .projects-stage {
-                height: 500px;
+                height: 620px;
             }
 
             .project-detail-inner {
@@ -1079,7 +1129,7 @@
             }
 
             .projects-stage {
-                height: 535px;
+                height: 650px;
             }
 
             .project-detail {
@@ -1129,7 +1179,7 @@
             }
 
             .projects-stage {
-                height: 585px;
+                height: 690px;
             }
 
             .project-orbit-card {
@@ -1161,6 +1211,30 @@
             .project-dots {
                 order: 3;
                 width: 100%;
+            }
+        }
+
+
+        @media (max-width: 760px) {
+            .carousel-dots-bridge {
+                bottom: 226px;
+            }
+        }
+
+        @media (max-width: 520px) {
+            .carousel-dots-bridge {
+                bottom: 286px;
+            }
+
+            .project-orbit-category {
+                top: 18px;
+                left: 14px;
+                right: 14px;
+                font-size: 1.08rem;
+            }
+
+            .project-orbit-card h3 {
+                font-size: 0.78rem;
             }
         }
 
@@ -1238,9 +1312,7 @@
                         </h1>
 
                         <p class="hero-subtitle">
-                            Michael builds web applications, developer tools, data workflows, and interactive software.
-                            His experience combines programming, technical support, team coordination,
-                            documentation, and process improvement.
+                            Michael Redozubov is a software developer who builds practical web applications, automation tools, data workflows, and interactive software. He combines hands-on programming with technical support, clear documentation, and collaborative problem-solving to turn complex needs into reliable, user-friendly solutions.
                         </p>
 
                         <div class="hero-actions">
@@ -1267,10 +1339,6 @@
                         <span class="eyebrow">Professional background</span>
                         <h2 class="section-title">Experience</h2>
                     </div>
-                    <p class="section-description">
-                        Roles are listed in reverse chronological order. Each entry highlights the work,
-                        results, and technologies most relevant to software and technology positions.
-                    </p>
                 </div>
 
                 <div class="timeline-list">
@@ -1285,7 +1353,6 @@
                                     <h3>Information Technology Support Specialist</h3>
                                     <div class="experience-company">The Jayce Solutions</div>
                                 </div>
-                                <span class="experience-type">IT Support</span>
                             </div>
                             <p>
                                 Installed and supported hardware, software, networks, peripherals, office relocations, data transfers, inventory, and troubleshooting for 500+ users while helping deploy up to 200 configured workstations per day.
@@ -1310,7 +1377,6 @@
                                     <h3>Human Resources Programming Intern</h3>
                                     <div class="experience-company">Metropolitan Transportation Authority</div>
                                 </div>
-                                <span class="experience-type">Programming & Data</span>
                             </div>
                             <p>
                                 Built automated reporting with REST APIs, SQL, Microsoft Access, and Salesforce data, increasing productivity by 250% and training six employees and one manager.
@@ -1335,7 +1401,6 @@
                                     <h3>Software Developer &amp; Technical Educator</h3>
                                     <div class="experience-company">Onetap</div>
                                 </div>
-                                <span class="experience-type">Software & Education</span>
                             </div>
                             <p>
                                 Created 100+ programming tutorials, contributed 100K+ lines of code, supported 300+ active learners, reached 55,000+ users, and delivered long-form technical presentations.
@@ -1369,7 +1434,11 @@
 
                 <div class="projects-shell" id="projectsShell">
                     <div class="projects-stage" id="projectsStage">
-                        <div class="projects-ring" id="projectsRing" aria-label="Project carousel"></div>
+                        <div class="projects-orbit" id="projectsOrbit" aria-label="Project carousel"></div>
+
+                        <div class="carousel-dots-bridge">
+                            <div class="project-dots" id="projectDots" aria-label="Choose project"></div>
+                        </div>
 
                         <article class="project-detail" id="projectDetail" aria-live="polite">
                             <div class="project-detail-inner">
@@ -1389,8 +1458,6 @@
                             <button class="carousel-button" id="previousProject" type="button" aria-label="Previous project">←</button>
                             <button class="carousel-button" id="nextProject" type="button" aria-label="Next project">→</button>
                         </div>
-
-                        <div class="project-dots" id="projectDots" aria-label="Choose project"></div>
 
                         <div class="project-count" id="projectCount" aria-live="polite"></div>
                     </div>
@@ -1416,17 +1483,6 @@
                             <img class="resume-image" src="images/resume.jpg" alt="Michael Redozubov resume preview">
                         </a>
                     </div>
-
-                    <aside class="resume-side-card">
-                        <h3>Resume document</h3>
-                        <p>
-                            Keep the image optimized for web viewing and use a PDF as the primary downloadable
-                            version when available.
-                        </p>
-                        <a class="button button-primary" href="images/resume.jpg" target="_blank" rel="noopener noreferrer">
-                            Open full size
-                        </a>
-                    </aside>
                 </div>
             </div>
         </section>
@@ -1435,10 +1491,8 @@
             <div class="section-container">
                 <div class="contact-panel">
                     <div>
-                        <h2>Let’s connect.</h2>
-                        <p>
-                            What now? Click the links if you need help with software development, full-stack development, data analysis, implementation, technical support, automation, API integration, reporting, or web application development.
-                        </p>
+                        <h2>Contact Michael.</h2>
+                        <p>Reach out for software development, data, automation, or technical support work.</p>
                     </div>
 
                     <div class="contact-links">
@@ -1566,7 +1620,8 @@
             }
         ];
 
-        const projectsRing = document.getElementById("projectsRing");
+        const projectsOrbit = document.getElementById("projectsOrbit");
+        const projectsStage = document.getElementById("projectsStage");
         const projectDetail = document.getElementById("projectDetail");
         const projectDetailTitle = document.getElementById("projectDetailTitle");
         const projectDetailDescription = document.getElementById("projectDetailDescription");
@@ -1580,40 +1635,8 @@
 
         let activeProjectIndex = 0;
         let autoplayTimer = null;
-        let rotationLocked = false;
-        const autoplayDelay = 3400;
-
-        function getCircularOffset(index) {
-            const total = projects.length;
-            let offset = index - activeProjectIndex;
-
-            if (offset > total / 2) {
-                offset -= total;
-            }
-
-            if (offset < -total / 2) {
-                offset += total;
-            }
-
-            return offset;
-        }
-
-        function getCardTransform(offset) {
-            const absoluteOffset = Math.abs(offset);
-            const direction = Math.sign(offset);
-            const x = direction * Math.min(absoluteOffset, 3) * 152;
-            const z = 145 - absoluteOffset * 128;
-            const y = absoluteOffset === 0 ? 0 : 28 + absoluteOffset * 15;
-            const rotateY = direction * -24;
-            const scale = Math.max(0.62, 1 - absoluteOffset * 0.13);
-
-            return (
-                "translateX(-50%) " +
-                "translate3d(" + x + "px, " + y + "px, " + z + "px) " +
-                "rotateY(" + rotateY + "deg) " +
-                "scale(" + scale + ")"
-            );
-        }
+        let isPaused = false;
+        const autoplayDelay = 4200;
 
         function createProjectCards() {
             projects.forEach(function (project, index) {
@@ -1623,35 +1646,58 @@
                 card.setAttribute("aria-label", "Show " + project.title);
                 card.innerHTML =
                     '<span class="project-orbit-number">' +
-                        String(index + 1).padStart(2, "0") +
+                    String(index + 1).padStart(2, "0") +
                     '</span>' +
                     '<span class="project-orbit-category">' +
-                        project.category +
+                    project.category +
                     '</span>' +
                     '<h3>' +
-                        project.title +
+                    project.title +
                     '</h3>';
 
                 card.addEventListener("click", function () {
-                    activeProjectIndex = index;
-                    updateCarousel(true);
-                    restartAutoplay();
+                    selectProject(index, true);
                 });
 
-                projectsRing.appendChild(card);
+                projectsOrbit.appendChild(card);
 
                 const dot = document.createElement("button");
                 dot.className = "project-dot";
                 dot.type = "button";
                 dot.setAttribute("aria-label", "Show " + project.title);
                 dot.addEventListener("click", function () {
-                    activeProjectIndex = index;
-                    updateCarousel(true);
-                    restartAutoplay();
+                    selectProject(index, true);
                 });
-
                 projectDots.appendChild(dot);
             });
+        }
+
+        function getOrbitPosition(index) {
+            const total = projects.length;
+            const angleStep = (Math.PI * 2) / total;
+            const angle = (index - activeProjectIndex) * angleStep;
+            const depth = Math.cos(angle);
+            const stageWidth = projectsStage.clientWidth;
+            const radiusX = Math.min(360, Math.max(145, stageWidth * 0.36));
+            const radiusY = Math.min(92, Math.max(58, stageWidth * 0.09));
+            const x = Math.sin(angle) * radiusX;
+            const y = depth * radiusY;
+            const z = depth * 245;
+            const normalizedDepth = (depth + 1) / 2;
+            const scale = 0.58 + normalizedDepth * 0.48;
+            const rotateY = Math.sin(angle) * -24;
+
+            return {
+                transform:
+                    "translate(-50%, -50%) " +
+                    "translate3d(" + x + "px, " + y + "px, " + z + "px) " +
+                    "rotateY(" + rotateY + "deg) " +
+                    "scale(" + scale + ")",
+                opacity: 0.34 + normalizedDepth * 0.66,
+                brightness: 0.52 + normalizedDepth * 0.48,
+                saturation: 0.58 + normalizedDepth * 0.42,
+                zIndex: Math.round(normalizedDepth * 100)
+            };
         }
 
         function renderProjectDetail() {
@@ -1659,45 +1705,49 @@
 
             projectDetailTitle.textContent = project.title;
             projectDetailDescription.textContent = project.description;
-
             projectDetailTech.innerHTML = project.technologies
                 .map(function (technology) {
                     return "<span>" + technology + "</span>";
                 })
                 .join("");
 
-            const repositoryButton = project.repository
-                ? '<a class="button button-primary" href="' +
+            const actions = [];
+
+            if (project.repository) {
+                actions.push(
+                    '<a class="button button-primary" href="' +
                     project.repository +
                     '" target="_blank" rel="noopener noreferrer">View repository</a>'
-                : "";
+                );
+            }
 
-            const liveButton = project.live
-                ? '<a class="button button-secondary" href="' +
+            if (project.live) {
+                actions.push(
+                    '<a class="button button-secondary" href="' +
                     project.live +
                     '" target="_blank" rel="noopener noreferrer">View live site</a>'
-                : "";
+                );
+            }
 
-            projectDetailActions.innerHTML = repositoryButton + liveButton;
+            projectDetailActions.innerHTML = actions.join("");
         }
 
-        function updateCarousel(userSelected) {
-            const cards = Array.from(projectsRing.children);
+        function updateCarousel() {
+            const cards = Array.from(projectsOrbit.children);
 
             cards.forEach(function (card, index) {
-                const offset = getCircularOffset(index);
-                const distance = Math.abs(offset);
+                const position = getOrbitPosition(index);
                 const isActive = index === activeProjectIndex;
 
-                card.style.transform = getCardTransform(offset);
-                card.style.opacity = String(Math.max(0.28, 1 - distance * 0.18));
+                card.style.transform = position.transform;
+                card.style.opacity = String(position.opacity);
                 card.style.filter =
-                    "brightness(" + Math.max(0.48, 1 - distance * 0.13) + ") " +
-                    "saturate(" + Math.max(0.55, 1 - distance * 0.1) + ")";
-                card.style.zIndex = String(20 - distance);
+                    "brightness(" + position.brightness + ") " +
+                    "saturate(" + position.saturation + ")";
+                card.style.zIndex = String(position.zIndex);
                 card.classList.toggle("is-active", isActive);
                 card.setAttribute("aria-current", isActive ? "true" : "false");
-                card.tabIndex = isActive || distance <= 1 ? 0 : -1;
+                card.tabIndex = isActive ? 0 : -1;
             });
 
             Array.from(projectDots.children).forEach(function (dot, index) {
@@ -1712,39 +1762,30 @@
                 String(projects.length).padStart(2, "0");
 
             renderProjectDetail();
+        }
 
-            if (userSelected) {
-                const activeCard = cards[activeProjectIndex];
-                activeCard.animate(
-                    [
-                        { transform: getCardTransform(0) + " translateZ(0)" },
-                        { transform: getCardTransform(0) + " translateZ(24px)" },
-                        { transform: getCardTransform(0) + " translateZ(0)" }
-                    ],
-                    {
-                        duration: 650,
-                        easing: "cubic-bezier(0.2, 0.8, 0.2, 1)"
-                    }
-                );
+        function selectProject(index, restartRotation) {
+            activeProjectIndex = (index + projects.length) % projects.length;
+            updateCarousel();
+
+            if (restartRotation) {
+                startAutoplay();
             }
         }
 
         function showNextProject() {
-            activeProjectIndex = (activeProjectIndex + 1) % projects.length;
-            updateCarousel(false);
+            selectProject(activeProjectIndex + 1, false);
         }
 
         function showPreviousProject() {
-            activeProjectIndex =
-                (activeProjectIndex - 1 + projects.length) % projects.length;
-            updateCarousel(false);
+            selectProject(activeProjectIndex - 1, false);
         }
 
         function startAutoplay() {
             clearInterval(autoplayTimer);
 
             if (
-                rotationLocked ||
+                isPaused ||
                 window.matchMedia("(prefers-reduced-motion: reduce)").matches
             ) {
                 return;
@@ -1754,35 +1795,27 @@
         }
 
         function pauseAutoplay() {
-            rotationLocked = true;
+            isPaused = true;
             clearInterval(autoplayTimer);
         }
 
         function resumeAutoplay() {
-            rotationLocked = false;
-            startAutoplay();
-        }
-
-        function restartAutoplay() {
-            rotationLocked = false;
+            isPaused = false;
             startAutoplay();
         }
 
         previousProject.addEventListener("click", function () {
             showPreviousProject();
-            restartAutoplay();
+            startAutoplay();
         });
 
         nextProject.addEventListener("click", function () {
             showNextProject();
-            restartAutoplay();
+            startAutoplay();
         });
 
-        projectsRing.addEventListener("mouseenter", pauseAutoplay);
-        projectsRing.addEventListener("mouseleave", resumeAutoplay);
-        projectDetail.addEventListener("mouseenter", pauseAutoplay);
-        projectDetail.addEventListener("mouseleave", resumeAutoplay);
-
+        projectsShell.addEventListener("mouseenter", pauseAutoplay);
+        projectsShell.addEventListener("mouseleave", resumeAutoplay);
         projectsShell.addEventListener("focusin", pauseAutoplay);
         projectsShell.addEventListener("focusout", function (event) {
             if (!projectsShell.contains(event.relatedTarget)) {
@@ -1790,38 +1823,21 @@
             }
         });
 
-        createProjectCards();
-        updateCarousel(false);
-        startAutoplay();
-        }
+        projectsShell.addEventListener("keydown", function (event) {
+            if (event.key === "ArrowLeft") {
+                event.preventDefault();
+                showPreviousProject();
+            }
 
-        previousProject.addEventListener("click", function () {
-            showPreviousProject();
-            restartAutoplay();
-        });
-
-        nextProject.addEventListener("click", function () {
-            showNextProject();
-            restartAutoplay();
-        });
-
-        function pauseAutoplay() {
-            clearInterval(autoplayTimer);
-        }
-
-        projectsShell.addEventListener("mouseenter", pauseAutoplay);
-        projectsShell.addEventListener("mouseleave", startAutoplay);
-        projectsShell.addEventListener("focusin", pauseAutoplay);
-        projectsShell.addEventListener("focusout", startAutoplay);
-
-        projectsTrack.addEventListener("mouseover", pauseAutoplay);
-        projectsTrack.addEventListener("mouseout", function (event) {
-            if (!projectsTrack.contains(event.relatedTarget)) {
-                startAutoplay();
+            if (event.key === "ArrowRight") {
+                event.preventDefault();
+                showNextProject();
             }
         });
 
-        createProjectSlides();
+        window.addEventListener("resize", updateCarousel);
+
+        createProjectCards();
         updateCarousel();
         startAutoplay();
 
